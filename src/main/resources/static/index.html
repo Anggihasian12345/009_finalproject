@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    
+    <head>
+        
+        <title>Ws Consume</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Jquery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <style>
+            div {
+                background-color: blueviolet;
+            }
+            body{
+                background-color: burlywood;
+            }
+        </style>
+        
+    </head>
+    <body>
+        
+        <div >Data Test Sender</div>
+        <hr/>
+        
+        <script>
+            
+            const url = "http://localhost:8080/Post";
+            
+            function post() {
+                let ID = document.getElementById("id").value;
+                let name = document.getElementById("name").value;
+                let Pegawai = document.getElementById("nik").value;
+                let dataText = {"id":ID,"name":name,"nik":nikPegawai};
+                let dataJson = JSON.stringify(dataText);
+                
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: dataJson,
+                    contentType: 'application/json',
+                    dataType: 'text',
+                    success: function (result) {
+                        document.getElementById("viewer").innerHTML = result;
+                    }
+                })
+            }
+            
+            function put() {
+                
+                const urlp = "http://localhost:8080/Put";
+                
+                let ID = document.getElementById("id").value;
+                let name = document.getElementById("name").value;
+                let Pegawai = document.getElementById("nik").value;
+                let dataText = {"id":ID,"name":name,"nik":nikPegawai};
+                let dataJson = JSON.stringify(dataText);
+                
+                $.ajax({
+                    url: urlp,
+                    method: 'PUT',
+                    data: dataJson,
+                    contentType: 'application/json',
+                    dataType: 'text',
+                    success: function (result) {
+                        document.getElementById("viewer").innerHTML = result;
+                    }
+                })
+            }
+            
+            function get(){
+                const urlg = "http://localhost:8080/get";
+                $.ajax({
+                    url: urlg,
+                    method: 'GET',
+                    dataType: 'text',
+                    success: function (result) {
+                        document.getElementById("viewer").innerHTML = result;
+                    }
+                })
+            }
+            
+            function del() {
+                
+                let ID = document.getElementById("id").value;
+                let name = document.getElementById("name").value;
+                let Pegawai = document.getElementById("nik").value;
+                let dataText = {"id":ID,"name":name,"nik":nikPegawai};
+                let dataJson = JSON.stringify(dataText);
+                const urld = "http://localhost:8080/Delete";
+                
+                $.ajax({
+                    url: urld,
+                    method: 'DELETE',
+                    data: dataJson,
+                    contentType: 'application/json',
+                    dataType: 'text',
+                    success: function (result) {
+                        document.getElementById("viewer").innerHTML = result;
+                    }
+                })
+            }
+            
+            
+        </script>
+        
+        id : 
+        <input type="text" id="id" name="id"/> <p/>
+        
+        name :
+        <input type="text" id="name" name="name"/> <p/>
+        
+        nik:
+        <input type="text" id="nik" name="nik"/> <p/>
+        
+        photo:
+        <input type="file" id="photo" name="id"/>
+        
+        <hr/>
+        
+        <button onclick="get()">Get Data to Web Server</button> <br/>
+        <button onclick="post()">Send Data to Web Server</button> <br/>
+        <button onclick="put()">Edit Data to Web Server</button> <br/>
+        <button onclick="del()">Delete Data to Web Server</button>
+        
+        <hr/>
+        <div id="viewer"></div>
+        
+    </body>
+</html>
